@@ -1,3 +1,4 @@
+import typing
 import strawberry
 from fastapi import FastAPI
 from strawberry.asgi import GraphQL
@@ -10,12 +11,15 @@ class User:
     name: str
     age: int
 
+def get_users():
+    user_list = None
+    with open("./users.json") as users:
+        user_list = json.load(users)
+    return user_list
 
 @strawberry.type
 class Query:
-    @strawberry.field
-    def user(self) -> User:
-        return User(int=1, name="Patrick", age=100)
+    users: typing.List(User) = strawberry.field(resolver=get_users)
 
 
 schema = strawberry.Schema(query=Query)
