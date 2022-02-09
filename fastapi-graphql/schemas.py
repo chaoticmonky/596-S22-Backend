@@ -1,9 +1,7 @@
-from graphene import String, ObjectType
+import strawberry
 
-
-class CourseType(ObjectType):
-    id = String(required=True)
-    title = String(required=True)
-    instructor = String(required=True)
-    publish_date = String()
-
+@strawberry.type
+class User:
+    id: int
+    name: str
+    age: int
