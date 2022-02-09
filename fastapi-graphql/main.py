@@ -1,21 +1,28 @@
+import strawberry
 from fastapi import FastAPI
-from graphene import ObjectType, List, String, Schema
-from graphql.execution.executors.asyncio import AsyncioExecutor
-from starlette.graphql import GraphQLApp
-from schemas import CourseType
+from strawberry.asgi import GraphQL
 import json
 
-class Query (ObjectType):
-    course_list = None
-    get_course = List(CourseType)
-    async def resolve_get_course(self, info):
-        with open("./courses.json") as courses:
-            course_list = json.load(courses)
-        return course_list
+
+@strawberry.type
+class User:
+    id: int
+    name: str
+    age: int
+
+
+@strawberry.type
+class Query:
+    @strawberry.field
+    def user(self) -> User:
+        return User(int=1, name="Patrick", age=100)
+
+
+schema = strawberry.Schema(query=Query)
+
+
+graphql_app = GraphQL(schema)
 
 app = FastAPI()
-app.add_route("/", GraphQLApp(
-    schema=Schema(query=Query),
-    executor_class=AsyncioExecutor
-    )
-)
+app.add_route("/graphql", graphql_app)
+app.add_websocket_route("/graphql", graphql_app)

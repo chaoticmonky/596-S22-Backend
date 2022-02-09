@@ -1,26 +1,22 @@
 [
     {
       "id": "1",
-      "title": "Python variables explained",
-      "instructor": "Tracy Williams",
-      "publish_date": "12th May 2020"
+      "name": "Jagath Jai Kumar",
+      "age": "2000"
     },
     {
       "id": "2",
-      "title": "How to use functions in Python",
-      "instructor": "Jane Black",
-      "publish_date": "9th April 2018"
+      "name": "Benjamin Glickenhaus",
+      "age": "2001"
     },
     {
       "id": "3",
-      "title": "Asynchronous Python",
-      "instructor": "Matthew Rivers",
-      "publish_date": "10th July 2020"
+      "name": "Sam DuBois",
+      "age": "21"
     },
     {
       "id": "4",
-      "title": "Build a REST API",
-      "instructor": "Babatunde Mayowa",
-      "publish_date": "3rd March 2016"
+      "name": "Andres Gutierrez",
+      "age": "22"
     }
   ]
