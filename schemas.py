@@ -1,11 +1,33 @@
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel
+from sqlalchemy import true
 
-class NoteIn(BaseModel):
-    text: str
-    completed: bool
+# Item Models
+class ItemBase(BaseModel):
+    title: str
+    description: Optional[str] = None
 
-class Note(BaseModel):
+class ItemCreate(ItemBase):
+    pass
+
+class Item(ItemBase):
     id: int
-    text: str
-    completed: bool
+    owner_id: int
+
+    class Config:
+        orm_mode = True
+
+# User Models
+class UserBase(BaseModel):
+    email: str
+
+class UserCreate(UserBase):
+    password: str
+
+class User(UserBase):
+    id: int
+    is_active: bool
+    items: List[Item] = []
+
+    class Config:
+        orm_mode = True

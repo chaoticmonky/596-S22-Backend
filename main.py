@@ -31,7 +31,4 @@ async def shutdown():
 
 @app.get("/")
 def read_root():
-    return {"Hello" : "World"}
-
-
-@app.get
+    return {"Rescue" : "Backend"}
