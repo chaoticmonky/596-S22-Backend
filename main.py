@@ -2,6 +2,8 @@ from typing import Optional
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import database
+import models
+import schemas
 
 app = FastAPI()
 
@@ -30,3 +32,6 @@ async def shutdown():
 @app.get("/")
 def read_root():
     return {"Hello" : "World"}
+
+
+@app.get
