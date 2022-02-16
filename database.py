@@ -1,15 +1,16 @@
-from lib2to3.pgen2.token import SLASH
-from venv import create
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+import os
+import databases
+import sqlalchemy
+from schema import notes
 
-SQLALCHEMY_DATEBASE_URL = "postgresql://postgres:password@localhost:5432/rescue_db_dev"
+DATABASE_URL = "postgresql://postgres:password@localhost:5432/rescue_db_dev"
 
-engine = create_engine(
-    SQLALCHEMY_DATEBASE_URL,
+database = databases.Database(DATABASE_URL)
+
+metadata = sqlalchemy.MetaData()
+
+engine = sqlalchemy.create_engine(
+    DATABASE_URL
 )
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-Base = declarative_base()
+# metadata.create_all(engine) ## Populates PostegreSQL table with all data loaded in meta. Not needed since we use alembic
