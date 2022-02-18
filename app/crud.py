@@ -1,7 +1,7 @@
 from statistics import mode
 from sqlalchemy.orm import Session
 
-import models, schemas
+from . import models, schemas
 
 # Get User for User ID
 def get_user(db: Session, user_id: int):
