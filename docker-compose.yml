@@ -5,7 +5,7 @@ services:
   database:
     image: 'postgres:latest'
     ports: 
-      - 5500:5500
+      - 8005:5432
   
     # The location we use to share all of our secrets
     env_file:
