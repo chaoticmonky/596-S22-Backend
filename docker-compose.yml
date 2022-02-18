@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 # Setting up the PostgreSQL DB Container
 services:
@@ -20,8 +20,8 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./be-data/:/backend/
-    command: uvicorn app.main:app --reload --workers 1 --host 0.0.0.0 --port 8000
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8001
     env_file:
       - .env
     ports:
-      - 80:80
+      - 8001:8001
