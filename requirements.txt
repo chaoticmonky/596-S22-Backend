@@ -4,3 +4,4 @@ pydantic==1.9.0
 SQLAlchemy==1.4.31
 mysql-connector-python==8.0.28
 psycopg2==2.9.3
+python-dotenv==0.19.2
