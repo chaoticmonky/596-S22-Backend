@@ -1,17 +1,17 @@
 # 596-S22-Backend
 Backend Repo for 596RL Spring 2022
 
-.                                       \n
-├── app                                 \n
-│   ├── __init__.py                     \n
-│   └── main.py                         \n
-│   └── models.py                       \n
-│   └── schemas.py                      \n
-│   └── database.py                     \n
-│   └── crud.py                         \n
-├── Alembic                             \n
-├── Dockerfile                          \n
-└── requirements.txt                    \n
+.
+├── app
+│   ├── __init__.py
+│   └── main.py
+│   └── models.py
+│   └── schemas.py
+│   └── database.py
+│   └── crud.py
+├── Alembic
+├── Dockerfile
+└── requirements.txt
 
 ~~ MUST BE INSTALLED ~~
 - Docker
