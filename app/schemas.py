@@ -31,3 +31,13 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+# Message Models
+class Message(BaseModel):
+    id: int
+    text: str
+    owner_id: int
+    recipient_id: int
+
+    class Config:
+        orm_mode = True
