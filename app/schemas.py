@@ -34,11 +34,16 @@ class User(UserBase):
         orm_mode = True
 
 # Message Models
+class MessageCreate(BaseModel):
+    text: str
+    sender_id: int
+    recipient_id: int
+
 class Message(BaseModel):
     id: int
     text: str
     time: datetime = datetime.now()
-    owner_id: int
+    sender_id: int
     recipient_id: int
 
     class Config:

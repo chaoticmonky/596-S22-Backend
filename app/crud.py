@@ -46,8 +46,9 @@ def get_messages_for_user(user_id: int, db: Session, skip: int = 0, limit: int =
     return db.query(models.Message).filter(models.Message.sender_id == user_id).offset(skip).limit(limit).all()
 
 # Create Message For Sender (User) and Recipient (User)
-def create_message(message: models.Message, db: Session):
-    db.add(message)
+def create_message(message: schemas.MessageCreate, db: Session):
+    db_message = models.Message(text=message.text, sender_id=message.sender_id, recipient_id=message.recipient_id)
+    db.add(db_message)
     db.commit()
-    db.refresh(message)
-    return message
+    db.refresh(db_message)
+    return db_message
