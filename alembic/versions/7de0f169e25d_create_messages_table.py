@@ -19,7 +19,7 @@ depends_on = None
 def upgrade():
     op.create_table(
         "messages",
-        sa.Column("id", sa.Integer, primary_key=True),
+        sa.Column("id", sa.Integer, primary_key=True, index=True),
         sa.Column("text", sa.String, index=True),
         sa.Column("sender_id", sa.Integer),
         sa.ForeignKeyConstraint(('sender_id',), ['users.id'], ),

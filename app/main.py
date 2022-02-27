@@ -55,7 +55,7 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return items
 
 # Route - GET - get all messages for all users (test route)
-@app.get("/messages/", response_model=schemas.Message)
+@app.get("/messages/", response_model=List[schemas.Message])
 def read_messages(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     messages = crud.get_messages(db, skip, limit=limit)
     return messages
