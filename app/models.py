@@ -1,4 +1,5 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Date
+from datetime import datetime
+from sqlalchemy import TIMESTAMP, Boolean, Column, ForeignKey, Integer, String, Date
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -28,6 +29,7 @@ class Message(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     text = Column(String, index=True)
+    time = Column(TIMESTAMP(timezone=False), nullable=False, default=datetime.now())
     sender_id = Column(Integer, ForeignKey("users.id"))
     recipient_id = Column(Integer, index=True)
 

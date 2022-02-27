@@ -41,5 +41,5 @@ def get_messages(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Message).offset(skip).limit(limit).all()
 
 # Get all messages for specific user
-def get_message_for_user(user_id: int, db: Session, skip: int = 0, limit: int = 100):
+def get_messages_for_user(user_id: int, db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Message).filter(models.Message.sender_id == user_id).offset(skip).limit(limit).all()

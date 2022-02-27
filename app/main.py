@@ -1,3 +1,4 @@
+from email import message
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -63,5 +64,9 @@ def read_messages(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
 # Route - GET - get all messages for all users
 @app.get("/users/{user_id}/messages/", response_model=List[schemas.Message])
 def reader_messages_for_user(user_id: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    messages = crud.get_messages_for_user(user_id, db, skip, limit=limit)
+    messages = crud.get_messages_for_user(db=db, skip=skip, limit=limit, user_id=user_id)
     return messages
+
+@app.post("/messages/", response_model=schemas.Message)
+def create_message(user: schemas.Message, db: Session = Depends(get_db)):
+    return crud.create_message(db=db, message=message)
