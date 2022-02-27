@@ -24,7 +24,6 @@ def upgrade():
         sa.Column("sender_id", sa.Integer),
         sa.ForeignKeyConstraint(('sender_id',), ['users.id'], ),
         sa.Column("recipient_id", sa.Integer),
-        sa.ForeignKeyConstraint(('recipient_id',), ['users.id'], ),
     )
 
 
