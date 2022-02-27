@@ -32,5 +32,5 @@ class Message(Base):
     sender_id = Column(Integer, ForeignKey("users.id"))
     recipient_id = Column(Integer, ForeignKey("users.id"))
 
-    owner = relationship("User", back_populates="messages")
+    sender = relationship("User", back_populates="messages")
     recipient = relationship("User", back_populates="messages")

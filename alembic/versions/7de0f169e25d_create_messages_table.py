@@ -21,7 +21,9 @@ def upgrade():
         "messages",
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("text", sa.String, index=True),
+        sa.Column("sender_id", sa.Integer),
         sa.ForeignKeyConstraint(('sender_id',), ['users.id'], ),
+        sa.Column("recipient_id", sa.Integer),
         sa.ForeignKeyConstraint(('recipient_id',), ['users.id'], ),
     )
 
