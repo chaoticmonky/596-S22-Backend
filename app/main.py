@@ -59,3 +59,9 @@ def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def read_messages(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     messages = crud.get_messages(db, skip, limit=limit)
     return messages
+
+# Route - GET - get all messages for all users
+@app.get("/users/{user_id}/messages/", response_model=List[schemas.Message])
+def reader_messages_for_user(user_id: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    messages = crud.get_messages_for_user(user_id, db, skip, limit=limit)
+    return messages
