@@ -67,6 +67,7 @@ def reader_messages_for_user(user_id: int, skip: int = 0, limit: int = 100, db: 
     messages = crud.get_messages_for_user(db=db, skip=skip, limit=limit, user_id=user_id)
     return messages
 
+# Route - POST - create new message between user and recipient
 @app.post("/messages/", response_model=schemas.Message)
 def create_message(user: schemas.Message, db: Session = Depends(get_db)):
     return crud.create_message(db=db, message=message)

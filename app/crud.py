@@ -1,3 +1,4 @@
+from email import message
 from statistics import mode
 from sqlalchemy.orm import Session
 
@@ -43,3 +44,10 @@ def get_messages(db: Session, skip: int = 0, limit: int = 100):
 # Get all messages for specific user
 def get_messages_for_user(user_id: int, db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Message).filter(models.Message.sender_id == user_id).offset(skip).limit(limit).all()
+
+# Create Message For Sender (User) and Recipient (User)
+def create_message(message: models.Message, db: Session):
+    db.add(message)
+    db.commit()
+    db.refresh(message)
+    return message
