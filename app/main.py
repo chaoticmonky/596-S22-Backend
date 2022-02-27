@@ -53,3 +53,9 @@ def create_item_for_user(user_id: int, item: schemas.ItemCreate, db: Session = D
 def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     items = crud.get_items(db, skip, limit=limit)
     return items
+
+# Route - GET - get all messages for all users (test route)
+@app.get("/messages/", response_model=schemas.Message)
+def read_messages(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    messages = crud.get_messages(db, skip, limit=limit)
+    return messages
