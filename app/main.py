@@ -1,3 +1,4 @@
+from email import message
 from typing import List
 
 from fastapi import Depends, FastAPI, HTTPException
@@ -53,3 +54,20 @@ def create_item_for_user(user_id: int, item: schemas.ItemCreate, db: Session = D
 def read_items(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     items = crud.get_items(db, skip, limit=limit)
     return items
+
+# Route - GET - get all messages for all users (test route)
+@app.get("/messages/", response_model=List[schemas.Message])
+def read_messages(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    messages = crud.get_messages(db, skip, limit=limit)
+    return messages
+
+# Route - GET - get all messages for specific user
+@app.get("/users/{user_id}/messages/", response_model=List[schemas.Message])
+def reader_messages_for_user(user_id: int, skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    messages = crud.get_messages_for_user(db=db, skip=skip, limit=limit, user_id=user_id)
+    return messages
+
+# Route - POST - create new message between user and recipient
+@app.post("/messages/", response_model=schemas.Message)
+def create_message(message: schemas.MessageCreate, db: Session = Depends(get_db)):
+    return crud.create_message(db=db, message=message)

@@ -1,6 +1,7 @@
+from datetime import datetime
 from typing import List, Optional
 from pydantic import BaseModel
-from sqlalchemy import true
+from sqlalchemy import TIMESTAMP, true
 
 # Item Models
 class ItemBase(BaseModel):
@@ -28,6 +29,22 @@ class User(UserBase):
     id: int
     is_active: bool
     items: List[Item] = []
+
+    class Config:
+        orm_mode = True
+
+# Message Models
+class MessageCreate(BaseModel):
+    text: str
+    sender_id: int
+    recipient_id: int
+
+class Message(BaseModel):
+    id: int
+    text: str
+    time: datetime = datetime.now()
+    sender_id: int
+    recipient_id: int
 
     class Config:
         orm_mode = True
