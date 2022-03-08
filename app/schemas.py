@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, Dict
 from pydantic import BaseModel
 from sqlalchemy import TIMESTAMP, true
 
@@ -48,3 +48,12 @@ class Message(BaseModel):
 
     class Config:
         orm_mode = True
+
+# License Plate Models
+class License(BaseModel):
+    id: int
+    filename: str
+    dateUploaded = datetime.now()
+    link: str
+    recognizedPlates: Dict[str : List(TIMESTAMP)]
+
