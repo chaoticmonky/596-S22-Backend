@@ -73,7 +73,7 @@ class LicenseFootage(BaseModel):
     id: int
     filename: str
     date_uploaded = datetime.now()
-    recognized_plates: List(RecognizedPlate)
+    recognized_plates: List[RecognizedPlate] = []
 
     class Config:
         orm_mode = True

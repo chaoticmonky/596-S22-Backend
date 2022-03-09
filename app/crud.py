@@ -57,13 +57,26 @@ def create_message(message: schemas.MessageCreate, db: Session):
 def create_license_footage(license_footage: schemas.CreateLicenseFootage, db: Session):
     
     # Insert code to get identify all license plates and their attachment.
+
+    ####################
+    ## YOUR CODE HERE ##
+    ####################
+
     # return type - Array of License plates and their occurance - [RecognizedPlate]
 
     recognized_plates = []
     filename = os.path.basename(license_footage.link)
 
-    db_message = models.LicenseFootage(filename=filename, link=license_footage.link, recognized_plates=recognized_plates)
+    # Add License Footage Object
+    db_message = models.LicenseFootage(filename=filename, link=license_footage.link)
     db.add(db_message)
     db.commit()
     db.refresh(db_message)
+
+    # Add Plates individually
+    for plate in recognized_plates:
+        db.add(plate)
+        db.commit()
+        db.refresh(plate)
+
     return 'Success'
