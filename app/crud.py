@@ -103,5 +103,6 @@ def create_license_footage_with_obj(license_footage: schemas.LicenseFootage, db:
 
     return db_parent_message
 
+# Get all license plates for that license_footage id
 def get_license_plates_for_filename(footage_id: int, db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.RecognizedPlate).filter(models.RecognizedPlate.footage_id == footage_id).offset(skip).limit(limit).all()
