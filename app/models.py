@@ -53,5 +53,6 @@ class DenseCaptionChild(Base):
     bounding_y = Column(Float, index=True)
     bounding_w = Column(Float, index=True)
     bounding_h = Column(Float, index=True)
+    parent_id = Column(Integer, ForeignKey("denseCaptionParent.id"))
 
     parent = relationship("DenseCaptionParent", back_populates="children")
