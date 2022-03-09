@@ -52,15 +52,10 @@ class Message(BaseModel):
         orm_mode = True
 
 ######### Recognized Plates ###############
-class RecognizedPlateBase(BaseModel):
+class RecognizedPlate(BaseModel):
+    id: int
     license: str
     time: TIMESTAMP
-
-class CreateRecognizedPlate(RecognizedPlateBase):
-    pass
-
-class RecognizedPlate(RecognizedPlateBase):
-    id: int
     footage_id: int
 
     class Config:

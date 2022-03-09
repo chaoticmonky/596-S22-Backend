@@ -1,6 +1,7 @@
 from email import message
 from statistics import mode
 from sqlalchemy.orm import Session
+import os
 
 from . import models, schemas
 
@@ -52,3 +53,17 @@ def create_message(message: schemas.MessageCreate, db: Session):
     db.commit()
     db.refresh(db_message)
     return db_message
+
+def create_license_footage(license_footage: schemas.CreateLicenseFootage, db: Session):
+    
+    # Insert code to get identify all license plates and their attachment.
+    # return type - Array of License plates and their occurance - [RecognizedPlate]
+
+    recognized_plates = []
+    filename = os.path.basename(license_footage.link)
+
+    db_message = models.LicenseFootage(filename=filename, link=license_footage.link, recognized_plates=recognized_plates)
+    db.add(db_message)
+    db.commit()
+    db.refresh(db_message)
+    return 'Success'
