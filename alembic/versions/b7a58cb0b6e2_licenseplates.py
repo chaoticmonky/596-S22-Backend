@@ -23,19 +23,18 @@ def upgrade():
         sa.Column("filename", sa.String, unique=True, index=True),
         sa.Column("date_uploaded", sa.TIMESTAMP(), nullable=False, index=True),
         sa.Column("link", sa.String),
-        sa.Column("is_active", sa.Boolean, default=True),
     )
 
     op.create_table(
         "recognized_plates",
         sa.Column("id", sa.Integer, primary_key=True, index=True),
-        sa.Column("title", sa.String, index=True),
-        sa.Column("description", sa.String, index=True),
-        sa.Column("owner_id", sa.Integer),
-        sa.ForeignKeyConstraint(('owner_id',), ['users.id'], ),
+        sa.Column("license", sa.String, index=True),
+        sa.Column("time", sa.TIMESTAMP(), index=True),
+        sa.Column("footage_id", sa.Integer),
+        sa.ForeignKeyConstraint(('footage_id',), ['license_footage.id'], ),
     )
 
 
 def downgrade():
-    op.drop_table("users")
-    op.drop_table("items")
+    op.drop_table("license_footage")
+    op.drop_table("recognized_plates")

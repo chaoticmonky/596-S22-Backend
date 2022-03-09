@@ -42,7 +42,8 @@ class LicenseFootage(Base):
     filename = Column(String, index=True)
     date_uploaded = Column(TIMESTAMP(timezone=False), nullable=False, default=datetime.now())
     link = Column(String)
-    recognized_plates = Column()
+    
+    recognized_plates = relationship("RecognizedPlate", back_populates="footage")
 
 class RecognizedPlate(Base):
     __tablename__ = "recognized_plates"
