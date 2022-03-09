@@ -51,23 +51,34 @@ class Message(BaseModel):
     class Config:
         orm_mode = True
 
-# License Plates Recognized Model
-class RecognizedPlate(BaseModel):
-    id: int
+######### Recognized Plates ###############
+class RecognizedPlateBase(BaseModel):
     license: str
     time: TIMESTAMP
-    footageId: int
+
+class CreateRecognizedPlate(RecognizedPlateBase):
+    pass
+
+class RecognizedPlate(RecognizedPlateBase):
+    id: int
+    footage_id: int
 
     class Config:
         orm_mode = True
 
-# License Plate Models
+############ License Plate Footage #############
+
+class LicenseFootageBase(BaseModel):
+    link: str
+
+class CreateLicenseFootage(LicenseFootageBase):
+    pass 
+
 class LicenseFootage(BaseModel):
     id: int
     filename: str
-    dateUploaded = datetime.now()
-    link: str
-    recognizedPlates: List(RecognizedPlate)
+    date_uploaded = datetime.now()
+    recognized_plates: List(RecognizedPlate)
 
     class Config:
         orm_mode = True

@@ -36,10 +36,20 @@ class Message(Base):
     sender = relationship("User", back_populates="messages")
 
 class LicenseFootage(Base):
-    __tablename__ = "licenseFootage"
+    __tablename__ = "license_footage"
 
     id = Column(Integer, primary_key=True, index=True)
     filename = Column(String, index=True)
-    dateUploaded = Column(TIMESTAMP(timezone=False), nullable=False, default=datetime.now())
+    date_uploaded = Column(TIMESTAMP(timezone=False), nullable=False, default=datetime.now())
     link = Column(String)
-    recognizedPlates = Column()
+    recognized_plates = Column()
+
+class RecognizedPlate(Base):
+    __tablename__ = "recognized_plates"
+
+    id = Column(Integer, primary_key=True, index=True)
+    license = Column(String, index=True)
+    time = Column(TIMESTAMP(timezone=False))
+    footage_id = Column(Integer, ForeignKey("license_footage.id"))
+
+    footage = relationship("LicenseFootage", back_populates="recognized_plates")
