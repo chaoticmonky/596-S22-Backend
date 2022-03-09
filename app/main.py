@@ -74,8 +74,8 @@ def create_message(message: schemas.MessageCreate, db: Session = Depends(get_db)
 
 @app.post("/licenses/", response_model=schemas.CreateLicenseFootage)
 def create_license_footage(license_footage: schemas.CreateLicenseFootage, db:Session = Depends(get_db)):
-    return crud.create_license_footage(license_footage=license_footage, db=db)
+    return crud.create_license_footage_with_link(license_footage=license_footage, db=db)
 
-app.post("/licenses/", response_model=schemas.LicenseFootage)
+@app.post("/licenses/", response_model=schemas.LicenseFootage)
 def create_license_footage(license_footage: schemas.CreateLicenseFootage, db:Session = Depends(get_db)):
-    
+    return crud.create_license_footage_with_obj(license_footage=license_footage, db=db)
