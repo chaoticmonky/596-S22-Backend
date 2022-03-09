@@ -15,6 +15,7 @@ Backend Repo for 596RL Spring 2022
 
 ### MUST BE INSTALLED
 - Docker
+- Alembic (Locally for database manipulation)
 
 This repo uses Docker to containerize any processes used. In order to the run the repo, it is advised that you install docker.
 
@@ -29,9 +30,9 @@ docker-compose up
 ### Configuring PostgreSQL Server with Alembic
 In order to begin posting to routes and adding in data, you will need to load in all the proper tables. Using Alembic this is really easy.
 
-First, initialize your alembic configuration:
+First, install alembic onto your local machine:
 ```
-alembic init alembic
+pip3 install alembic
 ```
 
 Next, you need to upgrade the head in order to setup all the tables properly:
