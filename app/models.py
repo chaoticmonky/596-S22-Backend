@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import TIMESTAMP, Boolean, Column, ForeignKey, Integer, String, Date    
+from sqlalchemy import TIMESTAMP, Boolean, Column, ForeignKey, Integer, String, Date
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -42,7 +42,7 @@ class LicenseFootage(Base):
     filename = Column(String, index=True)
     date_uploaded = Column(TIMESTAMP(timezone=False), nullable=False, default=datetime.now())
     link = Column(String)
-    
+
     recognized_plates = relationship("RecognizedPlate", back_populates="footage")
 
 class RecognizedPlate(Base):

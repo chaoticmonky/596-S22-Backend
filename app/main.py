@@ -71,3 +71,11 @@ def reader_messages_for_user(user_id: int, skip: int = 0, limit: int = 100, db: 
 @app.post("/messages/", response_model=schemas.Message)
 def create_message(message: schemas.MessageCreate, db: Session = Depends(get_db)):
     return crud.create_message(db=db, message=message)
+
+@app.post("/licenses/", response_model=schemas.CreateLicenseFootage)
+def create_license_footage(license_footage: schemas.CreateLicenseFootage, db:Session = Depends(get_db)):
+    return crud.create_license_footage(license_footage=license_footage, db=db)
+
+app.post("/licenses/", response_model=schemas.LicenseFootage)
+def create_license_footage(license_footage: schemas.CreateLicenseFootage, db:Session = Depends(get_db)):
+    

@@ -54,7 +54,7 @@ def create_message(message: schemas.MessageCreate, db: Session):
     db.refresh(db_message)
     return db_message
 
-def create_license_footage(license_footage: schemas.CreateLicenseFootage, db: Session):
+def create_license_footage_with_link(license_footage: schemas.CreateLicenseFootage, db: Session):
 
     # Add License Footage Object
     db_message = models.LicenseFootage(filename=filename, link=license_footage.link)
@@ -80,4 +80,23 @@ def create_license_footage(license_footage: schemas.CreateLicenseFootage, db: Se
         db.commit()
         db.refresh(plate)
 
-    return 'Success'
+    return license_footage
+
+def create_license_footage_with_obj(license_footage: schemas.LicenseFootage, db: Session):
+
+    # Add the parent information
+    db_parent_message = models.LicenseFootage(filename=license_footage.filename, link=license_footage.link)
+    db.add(db_parent_message)
+    db.commit()
+    db.refresh(db_parent_message)
+
+    parent_id = db_parent_message.id
+
+    # Add the child information
+    for plate in license_footage.recognized_plates:
+        db_child_message = models.RecognizedPlate(license=plate.license, time=plate.time, footage_id=parent_id)
+        db.add(db_child_message)
+        db.commit()
+        db.refresh(db_child_message)
+
+    return db_parent_message
