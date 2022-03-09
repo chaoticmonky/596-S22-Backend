@@ -69,7 +69,7 @@ class LicenseFootageBase(BaseModel):
 class CreateLicenseFootage(LicenseFootageBase):
     pass 
 
-class LicenseFootage(BaseModel):
+class LicenseFootage(LicenseFootageBase):
     id: int
     filename: str
     date_uploaded = datetime.now()
