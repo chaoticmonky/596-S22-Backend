@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, Dict, Union
 from pydantic import BaseModel
 from sqlalchemy import TIMESTAMP, true
 
@@ -48,3 +48,7 @@ class Message(BaseModel):
 
     class Config:
         orm_mode = True
+
+class DenseCaptionCreate(BaseModel):
+    opt: Dict[str, Union[str, int]]
+    results: List[Dict[str, Union[str, List[float], List[str], List[List[float]]]]]

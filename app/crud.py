@@ -52,3 +52,16 @@ def create_message(message: schemas.MessageCreate, db: Session):
     db.commit()
     db.refresh(db_message)
     return db_message
+
+def create_dense_caption(data: schemas.DenseCaptionCreate, db: Session):
+    for entry in data.results:
+        db_dense_caption_parent = models.DenseCaptionParent(imageName=entry["image_name"])
+        db.add(db_dense_caption_parent)
+        db.commit()
+        db.refresh(db_dense_caption_parent)
+        for i in range(len(entry["scores"])):
+            db_dense_caption_child = models.DenseCaptionChild(score=entry["scores"][i], caption=entry["captions"][i], bounding_x=entry["box"][i][0], bounding_y=entry["box"][i][1], bounding_w=entry["box"][i][2], bounding_l=entry["box"][i][3])
+            db.add(db_dense_caption_child)
+            db.commit()
+            db.refresh(db_dense_caption_child)
+    return "success!!"

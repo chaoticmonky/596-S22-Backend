@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import TIMESTAMP, Boolean, Column, ForeignKey, Integer, String, Date
+from sqlalchemy import TIMESTAMP, Boolean, Column, ForeignKey, Integer, String, Date, Float
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -34,3 +34,24 @@ class Message(Base):
     recipient_id = Column(Integer, index=True)
 
     sender = relationship("User", back_populates="messages")
+
+class DenseCaptionParent(Base):
+    __tablename__ = "denseCaptionParent"
+
+    id = Column(Integer, primary_key=True, index=True)
+    imageName = Column(String, index=True)
+
+    children = relationship("DenseCaptionChild", back_populates="parent")
+
+class DenseCaptionChild(Base):
+    __tablename__ = "denseCaptionChild"
+
+    id = Column(Integer, primary_key=True, index=True)
+    caption = Column(String, index=True)
+    score = Column(Float, index=True)
+    bounding_x = Column(Float, index=True)
+    bounding_y = Column(Float, index=True)
+    bounding_w = Column(Float, index=True)
+    bounding_h = Column(Float, index=True)
+
+    parent = relationship("DenseCaptionParent", back_populates="children")

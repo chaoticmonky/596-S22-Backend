@@ -71,3 +71,7 @@ def reader_messages_for_user(user_id: int, skip: int = 0, limit: int = 100, db: 
 @app.post("/messages/", response_model=schemas.Message)
 def create_message(message: schemas.MessageCreate, db: Session = Depends(get_db)):
     return crud.create_message(db=db, message=message)
+
+@app.post("/denseCaptionCreate/", response_model=str)
+def create_dense_caption(data: schemas.DenseCaptionCreate, db: Session = Depends(get_db)):
+    return crud.create_message(data=data, db=db)
