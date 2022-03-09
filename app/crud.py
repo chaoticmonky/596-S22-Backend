@@ -54,6 +54,7 @@ def create_message(message: schemas.MessageCreate, db: Session):
     db.refresh(db_message)
     return db_message
 
+# Create License Footage using specified Link
 def create_license_footage_with_link(license_footage: schemas.CreateLicenseFootage, db: Session):
 
     # Add License Footage Object
@@ -82,6 +83,7 @@ def create_license_footage_with_link(license_footage: schemas.CreateLicenseFoota
 
     return license_footage
 
+# Create License Footage with Specified Object
 def create_license_footage_with_obj(license_footage: schemas.LicenseFootage, db: Session):
 
     # Add the parent information
@@ -100,3 +102,6 @@ def create_license_footage_with_obj(license_footage: schemas.LicenseFootage, db:
         db.refresh(db_child_message)
 
     return db_parent_message
+
+def get_license_plates_for_filename(footage_id: int, db: Session):
+    pass

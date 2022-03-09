@@ -1,4 +1,5 @@
 from datetime import datetime
+from fileinput import filename
 from sqlite3 import Timestamp
 from typing import List, Optional, Dict
 from xmlrpc.client import DateTime
@@ -55,11 +56,15 @@ class Message(BaseModel):
 class RecognizedPlate(BaseModel):
     id: int
     license: str
-    time: TIMESTAMP
+    time: datetime
     footage_id: int
 
     class Config:
         orm_mode = True
+
+class CreateRecognizedPlate(BaseModel):
+    license: str
+    time: datetime
 
 ############ License Plate Footage #############
 
@@ -68,6 +73,11 @@ class LicenseFootageBase(BaseModel):
 
 class CreateLicenseFootage(LicenseFootageBase):
     pass 
+
+class CreateLicenseFootageObj(BaseModel):
+    link: str
+    filename: str
+    recognized_plates : List[CreateRecognizedPlate]
 
 class LicenseFootage(LicenseFootageBase):
     id: int
