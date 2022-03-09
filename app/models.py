@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import TIMESTAMP, Boolean, Column, ForeignKey, Integer, String, Date
+from sqlalchemy import TIMESTAMP, Boolean, Column, ForeignKey, Integer, String, Date    
 from sqlalchemy.orm import relationship
 
 from .database import Base
@@ -34,3 +34,12 @@ class Message(Base):
     recipient_id = Column(Integer, index=True)
 
     sender = relationship("User", back_populates="messages")
+
+class LicenseFootage(Base):
+    __tablename__ = "licenseFootage"
+
+    id = Column(Integer, primary_key=True, index=True)
+    filename = Column(String, index=True)
+    dateUploaded = Column(TIMESTAMP(timezone=False), nullable=False, default=datetime.now())
+    link = Column(String)
+    recognizedPlates = Column()

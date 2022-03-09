@@ -1,5 +1,7 @@
 from datetime import datetime
+from sqlite3 import Timestamp
 from typing import List, Optional, Dict
+from xmlrpc.client import DateTime
 from pydantic import BaseModel
 from sqlalchemy import TIMESTAMP, true
 
@@ -49,11 +51,23 @@ class Message(BaseModel):
     class Config:
         orm_mode = True
 
+# License Plates Recognized Model
+class RecognizedPlate(BaseModel):
+    id: int
+    license: str
+    time: TIMESTAMP
+    footageId: int
+
+    class Config:
+        orm_mode = True
+
 # License Plate Models
-class License(BaseModel):
+class LicenseFootage(BaseModel):
     id: int
     filename: str
     dateUploaded = datetime.now()
     link: str
-    recognizedPlates: Dict[str : List(TIMESTAMP)]
+    recognizedPlates: List(RecognizedPlate)
 
+    class Config:
+        orm_mode = True
